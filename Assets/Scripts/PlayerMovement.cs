@@ -24,4 +24,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(moveDirection.x * horizontalMoveSpeed, verticalMoveSpeed);
     }
+
+    public void ReverseVerticalMoveSpeed()
+    {
+        Debug.Log("test");
+        verticalMoveSpeed *= -1;
+    }
 }
