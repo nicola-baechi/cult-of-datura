@@ -250,6 +250,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalMoveSpeed: 6
   verticalMoveSpeed: 3
+  dashSpeed: 50
+  dashDuration: 0.2
+  doubleTapTime: 0.2
   rb: {fileID: 381359858}
 --- !u!61 &381359862
 BoxCollider2D:
