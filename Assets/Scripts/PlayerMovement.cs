@@ -7,8 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float horizontalMoveSpeed = 5f;
     public float verticalMoveSpeed = 1f;
-
-    public Animator animator;
+    
     public Rigidbody2D rb;
     
     private Vector2 moveDirection;
@@ -17,9 +16,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float moveX = Input.GetAxis("Horizontal");
-        
+
         moveDirection = new Vector2(moveX, 0).normalized;
-        animator.SetFloat("Horizontal", moveDirection.x);
     }
 
     private void FixedUpdate()
