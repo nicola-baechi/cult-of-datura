@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         gameObject.GetComponent<EventManager>().OnPlayerCollectHealItem -= ResetHypnotizedState;
     }
 
-    private void SetHypnotizedState()
+    public void SetHypnotizedState()
     {
         _health--;
         if(_health <= 0)
