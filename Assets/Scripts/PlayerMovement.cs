@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float lastTapTimeA = 0f;
     private float lastTapTimeD = 0f;
+    private bool isDashing = false;
     
     
 
@@ -23,6 +24,14 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     
     private Vector2 moveDirection;
+
+    private void Start()
+    {
+        tr = GetComponent<TrailRenderer>();
+        
+        if (tr != null)
+            tr.enabled = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -46,6 +55,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckForDash()
     {
+        if (isDashing)
+        {
+            return;
+        }
+        
         if (Input.GetKeyDown(KeyCode.A))
         {
             if (Time.time - lastTapTimeA < doubleTapTime)
@@ -66,12 +80,31 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash(int direction)
     {
+        isDashing = true;
         float originalSpeed = horizontalMoveSpeed;
+
+        //Enable Trail renderer
+        if (tr != null)
+        {
+            tr.enabled = true;
+        }
         
+        //Increase Speed for dashing
         horizontalMoveSpeed = dashSpeed * direction;
+        
         yield return new WaitForSeconds(dashDuration);
-        horizontalMoveSpeed = Mathf.Abs(originalSpeed);
+        
+        //Speed reset
+        horizontalMoveSpeed = Mathf.Abs(originalSpeed) * (direction < 0 ? -1 : 1);
+
+        //Disable Trail renderer
+        if (tr != null)
+        {
+            tr.enabled = false;
+        }
+
+        isDashing = false;
+
     }
-    
-    
 }
+
