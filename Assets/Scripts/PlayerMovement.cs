@@ -15,6 +15,11 @@ public class PlayerMovement : MonoBehaviour
     private float lastTapTimeA = 0f;
     private float lastTapTimeD = 0f;
     
+    
+
+    [SerializeField]
+    private TrailRenderer tr;
+    
     public Rigidbody2D rb;
     
     private Vector2 moveDirection;
@@ -62,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Dash(int direction)
     {
         float originalSpeed = horizontalMoveSpeed;
+        
         horizontalMoveSpeed = dashSpeed * direction;
         yield return new WaitForSeconds(dashDuration);
         horizontalMoveSpeed = Mathf.Abs(originalSpeed);
