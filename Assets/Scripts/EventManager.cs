@@ -20,6 +20,8 @@ public class EventManager : MonoBehaviour
     public event Action OnPlayerEnterTrigger;
 
     public event Action OnPlayerCollectHealItem;
+    
+    public event Action OnPlayerCollectProjectileItem;
 
     public void PlayerEnterTrigger()
     {
@@ -29,5 +31,10 @@ public class EventManager : MonoBehaviour
     public void PlayerCollectHealItem()
     {
         OnPlayerCollectHealItem?.Invoke();
+    }
+    
+    public void PlayerCollectProjectileItem()
+    {
+        OnPlayerCollectProjectileItem?.Invoke();
     }
 }

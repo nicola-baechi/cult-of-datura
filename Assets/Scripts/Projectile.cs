@@ -38,6 +38,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("hit:" + other.gameObject.name);
             gameManager.GetComponent<GameManager>().SetHypnotizedState();
             Destroy(gameObject);
         }
