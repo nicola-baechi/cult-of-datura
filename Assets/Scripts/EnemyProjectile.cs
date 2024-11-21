@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
     public float speed;
     
@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("hit:" + other.gameObject.name);
-            gameManager.GetComponent<GameManager>().SetHypnotizedState();
+            gameManager.GetComponent<GameManager>().HandleHypnotizedState();
             Destroy(gameObject);
         }
     }

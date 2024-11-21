@@ -4,7 +4,10 @@ public class ProjectileItem : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
-        EventManager.Instance.PlayerCollectProjectileItem();
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            EventManager.Instance.PlayerCollectProjectileItem();
+        }
     }
 }
