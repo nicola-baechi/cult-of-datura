@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalMoveSpeed: 6
   verticalMoveSpeed: 1
-  dashSpeed: 50
+  dashSpeed: 25
   dashDuration: 0.2
   doubleTapTime: 0.2
   tr: {fileID: 0}

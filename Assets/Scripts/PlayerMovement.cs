@@ -80,6 +80,8 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash(int direction)
     {
+        BoxCollider2D boxCollider2D = GetComponent<BoxCollider2D>();
+        boxCollider2D.enabled = false;
         isDashing = true;
         float originalSpeed = horizontalMoveSpeed;
 
@@ -104,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isDashing = false;
-
+        boxCollider2D.enabled = true;
     }
 }
 
