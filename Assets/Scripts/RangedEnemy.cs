@@ -7,7 +7,10 @@ public class RangedEnemy : MonoBehaviour
     public GameObject projectile;
     public Transform projectilePosition;
     private GameObject player;
-
+    
+    [SerializeField]
+    private float cooldown = 2;
+    
     private float timer;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +26,7 @@ public class RangedEnemy : MonoBehaviour
         
         timer += Time.deltaTime;
 
-        if (timer > 2)
+        if (timer > cooldown)
         {
             timer = 0;
             shoot();

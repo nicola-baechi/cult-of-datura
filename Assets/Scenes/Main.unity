@@ -393,7 +393,7 @@ MonoBehaviour:
   onGameOver:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1919221984}
         m_TargetAssemblyTypeName: GameSceneManager, Assembly-CSharp
         m_MethodName: LoadGameOverScene
         m_Mode: 1
