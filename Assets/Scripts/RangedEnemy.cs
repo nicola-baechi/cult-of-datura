@@ -22,7 +22,7 @@ public class RangedEnemy : MonoBehaviour
     void Update()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        if(distanceToPlayer > 10) return;
+        if(distanceToPlayer > 6) return;
         
         timer += Time.deltaTime;
 

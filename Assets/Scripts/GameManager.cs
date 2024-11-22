@@ -1,64 +1,88 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject player;
+    public PlayerMovement player;
     public GameObject healItemPrefab;
 
     [SerializeField] private UnityEvent onGameOver;
-    
-    private GameObject _healItemInstance;
+    [SerializeField] private GameObject vignette;
     private int _health = 3;
     private bool _isHypnotized;
+    private bool _isShieldActive;
     
     private void OnEnable()
     {
-        gameObject.GetComponent<EventManager>().OnPlayerEnterTrigger += HandleHypnotizedState;
+        gameObject.GetComponent<EventManager>().OnPlayerEnterTrigger += HandlePlayerHitByEnemy;
         gameObject.GetComponent<EventManager>().OnPlayerCollectHealItem += ResetHypnotizedState;
+        gameObject.GetComponent<EventManager>().OnPlayerCollectShieldItem += ActivateShield;
+        gameObject.GetComponent<EventManager>().OnPlayerMissHealItem += SpawnHealItem;
         gameObject.GetComponent<EventManager>().OnPlayerCollectProjectileItem += updateInventory;
+        gameObject.GetComponent<EventManager>().OnPlayerReachStart += OnGameOver;
     }
 
     private void OnDisable()
     {
-        gameObject.GetComponent<EventManager>().OnPlayerEnterTrigger -= HandleHypnotizedState;
+        gameObject.GetComponent<EventManager>().OnPlayerEnterTrigger -= HandlePlayerHitByEnemy;
         gameObject.GetComponent<EventManager>().OnPlayerCollectHealItem -= ResetHypnotizedState;
+        gameObject.GetComponent<EventManager>().OnPlayerCollectShieldItem -= ActivateShield;
+        gameObject.GetComponent<EventManager>().OnPlayerMissHealItem -= SpawnHealItem;
         gameObject.GetComponent<EventManager>().OnPlayerCollectProjectileItem -= updateInventory;
+        gameObject.GetComponent<EventManager>().OnPlayerReachStart -= OnGameOver;
     }
 
-    public void HandleHypnotizedState()
+    public void HandlePlayerHitByEnemy()
     {
+        if (_isShieldActive)
+        {
+            return;
+        }
+        
         _health--;
         Debug.Log("health reduced to: " + _health);
-        if (_health <= 0 || _isHypnotized)
+        if (_isHypnotized || _health <= 0)
         {
+            player.SetFullyHypnotized();
             OnGameOver();
             return;
         }
 
+        vignette.GetComponent<SpriteRenderer>().enabled = true;
+        player.ReverseVerticalMoveSpeed();
         _isHypnotized = true;
-        player.GetComponent<PlayerMovement>().ReverseVerticalMoveSpeed();
         SpawnHealItem();
     }
 
     private void ResetHypnotizedState()
     {
         _isHypnotized = false;
-        player.GetComponent<PlayerMovement>().ReverseVerticalMoveSpeed();
-        Destroy(_healItemInstance);
+        player.ReverseVerticalMoveSpeed();
+        vignette.GetComponent<SpriteRenderer>().enabled = false;
+        
+        DestroyAllHealItems();
+    }
+    
+    private void DestroyAllHealItems()
+    {
+        GameObject[] healItems = GameObject.FindGameObjectsWithTag("Heal");
+        foreach (GameObject healItem in healItems)
+        {
+            Destroy(healItem);
+        }
     }
 
     private void SpawnHealItem()
     {
+        Debug.Log("respawning heal item");
         Vector3 spawnPosition;
         do
         {
-            float randomX = Random.Range(-7f, 7f); // Adjust the range as needed
-            float randomY = Random.Range(-10f, -5f); // Adjust the range as needed
+            float randomX = Random.Range(-6f, 6f);
+            float randomY = Random.Range(-10f, -5f);
             spawnPosition = player.transform.position + new Vector3(randomX, randomY, 0);
         } while (Physics2D.OverlapCircle(spawnPosition, 0.5f) != null);
-        _healItemInstance = Instantiate(
+        Instantiate(
             healItemPrefab,
             spawnPosition,
             Quaternion.identity
@@ -68,6 +92,17 @@ public class GameManager : MonoBehaviour
     private void updateInventory()
     {
         player.GetComponent<PlayerAction>().AddProjectile();
+    }
+
+    private void ActivateShield()
+    {
+        _isShieldActive = true;
+        Invoke(nameof(DeactivateShield), 5);
+    }
+    
+    private void DeactivateShield()
+    {
+        _isShieldActive = false;
     }
 
     public void OnGameOver()

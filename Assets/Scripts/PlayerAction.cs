@@ -8,10 +8,10 @@ public class PlayerAction : MonoBehaviour
     private void Update()
     {
         if (_projectileCount < 1) return;
-        
+
         ShootProjectile(GetNearestRangedEnemyInRange());
     }
-    
+
     public void AddProjectile()
     {
         _projectileCount++;

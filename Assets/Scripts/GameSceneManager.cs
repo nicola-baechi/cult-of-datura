@@ -1,14 +1,15 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
+    public static GameSceneManager Instance { get; private set; }
+    
     private readonly string START_SCENE = "Start";
     private readonly string MAIN_SCENE = "Main";
     private readonly string GAME_OVER_SCENE = "GameOver";
-    
-    public static GameSceneManager Instance { get; private set; }
 
     public void Awake()
     {
@@ -57,6 +58,11 @@ public class GameSceneManager : MonoBehaviour
     }
 
     public void LoadGameOverScene()
+    {
+        Invoke(nameof(_loadGameOverScene), 3);
+    }
+    
+    private void _loadGameOverScene()
     {
         SceneManager.LoadScene(GAME_OVER_SCENE, LoadSceneMode.Single);
     }

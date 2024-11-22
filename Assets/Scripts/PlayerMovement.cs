@@ -1,12 +1,11 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float horizontalMoveSpeed = 5f;
     public float verticalMoveSpeed = 1f;
+    private bool isFullyHypnotized;
     
     public float dashSpeed = 15f;
     public float dashDuration = 0.2f;
@@ -16,8 +15,6 @@ public class PlayerMovement : MonoBehaviour
     private float lastTapTimeD = 0f;
     private bool isDashing = false;
     
-    
-
     [SerializeField]
     private TrailRenderer tr;
     
@@ -36,8 +33,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isFullyHypnotized)
+        {
+            moveDirection = new Vector2(0, -1).normalized;
+            return;
+        }
+        
         float moveX = Input.GetAxis("Horizontal");
-
         moveDirection = new Vector2(moveX, 0).normalized;
         
         CheckForDash();
@@ -51,6 +53,11 @@ public class PlayerMovement : MonoBehaviour
     public void ReverseVerticalMoveSpeed()
     {
         verticalMoveSpeed *= -1;
+    }
+    
+    public void SetFullyHypnotized()
+    {
+        isFullyHypnotized = true;
     }
 
     private void CheckForDash()
