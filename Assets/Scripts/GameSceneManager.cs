@@ -7,6 +7,21 @@ public class GameSceneManager : MonoBehaviour
     private readonly string START_SCENE = "Start";
     private readonly string MAIN_SCENE = "Main";
     private readonly string GAME_OVER_SCENE = "GameOver";
+    
+    public static GameSceneManager Instance { get; private set; }
+
+    public void Awake()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        SceneManager.LoadScene(START_SCENE, LoadSceneMode.Single);
+    }
 
     private void Update()
     {
