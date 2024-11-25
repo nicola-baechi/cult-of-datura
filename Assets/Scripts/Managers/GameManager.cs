@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         if (_isHypnotized || _health <= 0)
         {
             player.SetFullyHypnotized();
+            DestroyAllHealItems();
             OnGameOver();
             return;
         }
