@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
     
     public void SetFullyHypnotized()
     {
+        GetComponent<BoxCollider2D>().enabled = false;
         isFullyHypnotized = true;
         moveDirection = new Vector2(0, moveDirection.y).normalized;
         ReverseVerticalMoveSpeed();

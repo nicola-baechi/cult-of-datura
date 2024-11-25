@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
         
         _health--;
         Debug.Log("health reduced to: " + _health);
+
+        vignette.GetComponent<SpriteRenderer>().enabled = true;
         if (_isHypnotized || _health <= 0)
         {
             player.SetFullyHypnotized();
@@ -49,7 +51,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        vignette.GetComponent<SpriteRenderer>().enabled = true;
         player.ReverseVerticalMoveSpeed();
         _isHypnotized = true;
         SpawnHealItem();
