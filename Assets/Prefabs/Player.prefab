@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalMoveSpeed: 6
-  verticalMoveSpeed: 1
+  verticalMoveSpeed: 3
   dashSpeed: 25
   dashDuration: 0.2
   doubleTapTime: 0.2

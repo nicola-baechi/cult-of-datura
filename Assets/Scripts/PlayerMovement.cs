@@ -35,20 +35,14 @@ public class PlayerMovement : MonoBehaviour
         if (tr != null)
             tr.enabled = false;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
-        if (isFullyHypnotized)
-        {
-            moveDirection = new Vector2(0, -1).normalized;
-            PlayHyponotizedSound();
-            return;
-        }
+        animator.SetFloat(Vertical, verticalMoveSpeed);
+        if (isFullyHypnotized) return;
         
         float moveX = Input.GetAxis("Horizontal");
         moveDirection = new Vector2(moveX, 0).normalized;
-        animator.SetFloat(Vertical, verticalMoveSpeed);
         
         CheckForDash();
     }
@@ -75,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
     public void SetFullyHypnotized()
     {
         isFullyHypnotized = true;
+        moveDirection = new Vector2(0, moveDirection.y).normalized;
+        ReverseVerticalMoveSpeed();
         PlayHyponotizedSound();
     }
 
