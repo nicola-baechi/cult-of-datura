@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     
     private Vector2 moveDirection;
+    
+    [SerializeField]
+    private AudioSource hypnotizedSound;
 
     private void Start()
     {
@@ -36,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         if (isFullyHypnotized)
         {
             moveDirection = new Vector2(0, -1).normalized;
+            PlayHyponotizedSound();
             return;
         }
         
@@ -48,6 +52,15 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveDirection.x * horizontalMoveSpeed, verticalMoveSpeed);
+        
+        if (rb.velocity.y < 0)
+        {
+            PlayHyponotizedSound();
+        }
+        else
+        {
+            StopHyponotizedSound();
+        }
     }
 
     public void ReverseVerticalMoveSpeed()
@@ -58,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
     public void SetFullyHypnotized()
     {
         isFullyHypnotized = true;
+        PlayHyponotizedSound();
     }
 
     private void CheckForDash()
@@ -114,6 +128,22 @@ public class PlayerMovement : MonoBehaviour
 
         isDashing = false;
         boxCollider2D.enabled = true;
+    }
+    
+    private void PlayHyponotizedSound()
+    {
+        if (hypnotizedSound != null && !hypnotizedSound.isPlaying)
+        {
+            hypnotizedSound.Play();
+        }
+    }
+    
+    private void StopHyponotizedSound()
+    {
+        if (hypnotizedSound != null && hypnotizedSound.isPlaying)
+        {
+            hypnotizedSound.Stop();
+        }
     }
 }
 
