@@ -7,9 +7,12 @@ public class Bush : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.gameObject.CompareTag("Player"))
         {
             ReduceBushOpacity();
+            if(hiddenObject == null) return;
+            
             Instantiate(hiddenObject, transform.position, Quaternion.identity);
         }
     }

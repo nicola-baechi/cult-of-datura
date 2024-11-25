@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private static readonly int Vertical = Animator.StringToHash("verticalInput");
     public float horizontalMoveSpeed = 5f;
     public float verticalMoveSpeed = 1f;
-    private bool isFullyHypnotized;
     
     public float dashSpeed = 15f;
     public float dashDuration = 0.2f;
     public float doubleTapTime = 0.2f;
 
+    public Animator animator;
+
+    private bool isFullyHypnotized;
     private float lastTapTimeA = 0f;
     private float lastTapTimeD = 0f;
     private bool isDashing = false;
@@ -45,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         
         float moveX = Input.GetAxis("Horizontal");
         moveDirection = new Vector2(moveX, 0).normalized;
+        animator.SetFloat(Vertical, verticalMoveSpeed);
         
         CheckForDash();
     }
