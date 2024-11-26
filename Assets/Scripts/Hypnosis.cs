@@ -1,23 +1,34 @@
 using UnityEngine;
-using UnityEngine.Events;
 using Image = UnityEngine.UI.Image;
 
 public class Hypnosis : MonoBehaviour
 {
-    public UnityEvent onPlayerHit;
-    public UnityEvent onPlayerFullyHypnotized;
-
     [SerializeField] private int health = 3;
-    [SerializeField] private GameObject vignette;
 
+    private GameObject vignette;
     private bool _isHypnotized;
-    
+
+    private void OnEnable()
+    {
+        EventManager.Instance.onPlayerCollectHealItem.AddListener(ResetHypnosis);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Instance.onPlayerCollectHealItem.RemoveListener(ResetHypnosis);
+    }
+
+    private void Start()
+    {
+        vignette = GameObject.FindGameObjectWithTag("Vignette");
+    }
+
     public void ResetHypnosis()
     {
         _isHypnotized = false;
         vignette.GetComponent<Image>().enabled = false;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Damaging"))
@@ -27,11 +38,12 @@ public class Hypnosis : MonoBehaviour
             health--;
             if (health <= 0 || _isHypnotized)
             {
-                onPlayerFullyHypnotized.Invoke();
+                Debug.Log("Player died");
+                EventManager.Instance.onPlayerDie.Invoke();
             }
             else
             {
-                onPlayerHit.Invoke();
+                EventManager.Instance.onPlayerHit.Invoke();
             }
 
             _isHypnotized = true;

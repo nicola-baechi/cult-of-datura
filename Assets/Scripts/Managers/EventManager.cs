@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,6 +19,10 @@ public class EventManager : MonoBehaviour
 
     public UnityEvent onPlayerMissHealItem;
     public UnityEvent onPlayerReachStart;
-    public UnityEvent OnPlayerHitRangedEnemy;
-
+    public UnityEvent onPlayerHitRangedEnemy;
+    public UnityEvent onPlayerCollectHealItem;
+    public UnityEvent onPlayerCollectShieldItem;
+    public UnityEvent onPlayerHit;
+    public UnityEvent onPlayerDie;
+    public UnityEvent onPlayerReachEnd;
 }

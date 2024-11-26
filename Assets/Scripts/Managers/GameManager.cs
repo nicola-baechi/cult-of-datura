@@ -1,16 +1,11 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public PlayerMovement player;
     public GameObject healItemPrefab;
-
-    [SerializeField] private UnityEvent onGameOver;
 
     public void Awake()
     {
@@ -24,8 +19,29 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        Cursor.visible = false;
+        
+        EventManager.Instance.onPlayerHit.AddListener(SpawnHealItem);
+        EventManager.Instance.onPlayerCollectHealItem.AddListener(DestroyAllHealItems);
+        EventManager.Instance.onPlayerMissHealItem.AddListener(SpawnHealItem);
+        EventManager.Instance.onPlayerDie.AddListener(HandleGameOver);
+        EventManager.Instance.onPlayerReachStart.AddListener(HandleGameOver);
+    }
+    
+    private void OnDisable()
+    {
+        EventManager.Instance.onPlayerHit.RemoveListener(SpawnHealItem);
+        EventManager.Instance.onPlayerCollectHealItem.RemoveListener(DestroyAllHealItems);
+        EventManager.Instance.onPlayerMissHealItem.RemoveListener(SpawnHealItem);
+        EventManager.Instance.onPlayerDie.RemoveListener(HandleGameOver);
+        EventManager.Instance.onPlayerReachStart.RemoveListener(HandleGameOver);
+    }
+
     public void SpawnHealItem()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log("respawning heal item");
         Vector3 spawnPosition;
         do
@@ -46,7 +62,6 @@ public class GameManager : MonoBehaviour
     public void HandleGameOver()
     {
         DestroyAllHealItems();
-        onGameOver?.Invoke();
     }
 
     public void DestroyAllHealItems()

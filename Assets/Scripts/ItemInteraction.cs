@@ -1,11 +1,7 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ItemInteraction : MonoBehaviour
 {
-    public UnityEvent onCollectHeal;
-    public UnityEvent onCollectShield;
-    
     [SerializeField] private GameObject projectilePrefab;
     
     private int _projectileCount;
@@ -24,7 +20,7 @@ public class ItemInteraction : MonoBehaviour
         {
             case "Heal":
                 Debug.Log("Heal collected in ItemInteraction");
-                onCollectHeal.Invoke();
+                EventManager.Instance.onPlayerCollectHealItem.Invoke();
                 Destroy(other.gameObject);
                 break;
             case "Projectile":
@@ -76,7 +72,7 @@ public class ItemInteraction : MonoBehaviour
     private void ActivateShield()
     {
         _isShieldActive = true;
-        onCollectShield.Invoke();
+        EventManager.Instance.onPlayerCollectShieldItem.Invoke();
         Invoke(nameof(DeactivateShield), 5);
     }
     

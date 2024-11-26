@@ -33,7 +33,7 @@ public class PlayerProjectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("RangedEnemy"))
         {
-            EventManager.Instance.OnPlayerHitRangedEnemy.Invoke();
+            EventManager.Instance.onPlayerHitRangedEnemy.Invoke();
             Destroy(other.gameObject);
             Destroy(gameObject);
         }

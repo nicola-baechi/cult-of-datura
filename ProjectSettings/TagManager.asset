@@ -11,6 +11,7 @@ TagManager:
   - Damaging
   - Shield
   - Projectile
+  - Vignette
   layers:
   - Default
   - TransparentFX

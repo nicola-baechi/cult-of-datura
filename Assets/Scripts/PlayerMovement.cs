@@ -27,6 +27,20 @@ public class PlayerMovement : MonoBehaviour
     
     private Vector2 moveDirection;
 
+    private void OnEnable()
+    {
+        EventManager.Instance.onPlayerCollectHealItem.AddListener(HandleHealthyState);
+        EventManager.Instance.onPlayerHit.AddListener(HandleHypnotizedState);
+        EventManager.Instance.onPlayerDie.AddListener(HandleFullyHypnotizedState);
+    }
+    
+    private void OnDisable()
+    {
+        EventManager.Instance.onPlayerCollectHealItem.RemoveListener(HandleHealthyState);
+        EventManager.Instance.onPlayerHit.RemoveListener(HandleHypnotizedState);
+        EventManager.Instance.onPlayerDie.RemoveListener(HandleFullyHypnotizedState);
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

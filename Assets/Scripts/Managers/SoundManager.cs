@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -20,9 +19,6 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource gameOverSound;
 
-    [SerializeField] private AudioSource enterKeySound;
-
-
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -35,11 +31,37 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void OnEnable()
+    {
+        GameSceneManager.Instance.onSceneChangeToStart.AddListener(PlayStartSceneSound);
+        GameSceneManager.Instance.onSceneChangeToMain.AddListener(PlayMainSceneSound);
+        GameSceneManager.Instance.onSceneChangeToGameOver.AddListener(PlayGameOverSound);
+        EventManager.Instance.onPlayerCollectHealItem.AddListener(PlayHealItemSound);
+        EventManager.Instance.onPlayerCollectHealItem.AddListener(StopHyponotizedSound);
+        EventManager.Instance.onPlayerCollectHealItem.AddListener(PlayMainSceneSound);
+        EventManager.Instance.onPlayerCollectShieldItem.AddListener(PlayShieldItemSound);
+        EventManager.Instance.onPlayerHit.AddListener(PlayHyponotizedSound);
+        EventManager.Instance.onPlayerHit.AddListener(StopMainSceneSound);
+        EventManager.Instance.onPlayerHitRangedEnemy.AddListener(PlayRangedEnemyHitSound);
+    }
+
+    private void OnDisable()
+    {
+        GameSceneManager.Instance.onSceneChangeToStart.RemoveListener(PlayStartSceneSound);
+        GameSceneManager.Instance.onSceneChangeToMain.RemoveListener(PlayMainSceneSound);
+        GameSceneManager.Instance.onSceneChangeToGameOver.RemoveListener(PlayGameOverSound);
+        EventManager.Instance.onPlayerCollectHealItem.RemoveListener(PlayHealItemSound);
+        EventManager.Instance.onPlayerCollectHealItem.RemoveListener(StopHyponotizedSound);
+        EventManager.Instance.onPlayerCollectShieldItem.RemoveListener(PlayShieldItemSound);
+        EventManager.Instance.onPlayerHit.RemoveListener(PlayHyponotizedSound);
+        EventManager.Instance.onPlayerHit.RemoveListener(StopMainSceneSound);
+        EventManager.Instance.onPlayerHitRangedEnemy.RemoveListener(PlayRangedEnemyHitSound);
+    }
+
     public void PlayHyponotizedSound()
     {
         if (hypnotizedSound != null && !hypnotizedSound.isPlaying)
         {
-            hypnotizedSound.enabled = true;
             hypnotizedSound.Play();
         }
     }
@@ -80,10 +102,8 @@ public class SoundManager : MonoBehaviour
     public void PlayStartSceneSound()
     {
         StopAllBackgroundSounds();
-        CheckAudioSourceIsEnabled(startSceneSound);
         if (startSceneSound != null && !startSceneSound.isPlaying && startSceneSound.enabled)
         {
-            Debug.Log("Playing start scene sound");
             startSceneSound.loop = true;
             startSceneSound.Play();
             Debug.Log(startSceneSound.enabled);
@@ -97,6 +117,14 @@ public class SoundManager : MonoBehaviour
         {
             mainSceneSound.loop = true;
             mainSceneSound.Play();
+        }
+    }
+
+    public void StopMainSceneSound()
+    {
+        if (mainSceneSound != null && mainSceneSound.isPlaying)
+        {
+            mainSceneSound.Stop();
         }
     }
 
@@ -121,40 +149,21 @@ public class SoundManager : MonoBehaviour
         {
             mainSceneSound.Stop();
         }
+        
+        if(hypnotizedSound != null && hypnotizedSound.isPlaying)
+        {
+            hypnotizedSound.Stop();
+        }
 
         if (gameOverSound != null && gameOverSound.isPlaying)
         {
             gameOverSound.Stop();
         }
     }
-
-    public void PlaySceneChangeOnInputSound()
-    {
-        if (enterKeySound != null && !enterKeySound.isPlaying)
-        {
-            enterKeySound.Play();
-        }
-    }
-
+    
     private IEnumerator StopShieldSoundAfterDelay()
     {
         yield return new WaitForSeconds(5f);
         shieldSound.Stop();
-    }
-
-    private void CheckAudioSourceIsEnabled(AudioSource audioSource)
-    {
-        if (audioSource != null)
-        {
-            if (!audioSource.gameObject.activeInHierarchy)
-            {
-                audioSource.gameObject.SetActive(true);
-            }
-
-            if (!audioSource.enabled)
-            {
-                audioSource.enabled = true;
-            }
-        }
     }
 }
