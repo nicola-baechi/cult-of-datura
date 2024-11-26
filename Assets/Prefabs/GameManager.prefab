@@ -45,6 +45,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801c0e33e2a0a4505a6201fb45d4907e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onPlayerMissHealItem:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6998085222528457113}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SpawnHealItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPlayerReachStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6998085222528457113}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: HandleGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6998085222528457113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f832c5aaa5dfd4b7698ec41fc2df9a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4325146109161983933, guid: 187305277a2a940a4a8a33e1b3951ec6, type: 3}
+  player: {fileID: 0}
   healItemPrefab: {fileID: 9072108167431168360, guid: 00ff95c0d7589496b931d215741aa497, type: 3}
   onGameOver:
     m_PersistentCalls:
@@ -74,4 +104,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-  vignette: {fileID: 0}

@@ -4,34 +4,34 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private static readonly int Vertical = Animator.StringToHash("verticalInput");
+    
     public float horizontalMoveSpeed = 5f;
-    public float verticalMoveSpeed = 1f;
+    public float verticalMoveSpeed = 3f;
     
     public float dashSpeed = 15f;
     public float dashDuration = 0.2f;
     public float doubleTapTime = 0.2f;
 
     public Animator animator;
-
-    private bool isFullyHypnotized;
-    private float lastTapTimeA = 0f;
-    private float lastTapTimeD = 0f;
-    private bool isDashing = false;
+    
+    private float lastTapTimeA;
+    private float lastTapTimeD;
+    private bool isDashing;
+    
+    private bool controllsEnabled = true;
     
     [SerializeField]
     private TrailRenderer tr;
     
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
     
     private Vector2 moveDirection;
-    
-    [SerializeField]
-    private AudioSource hypnotizedSound;
 
-    private void Start()
+    private void Awake()
     {
-        tr = GetComponent<TrailRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         
+        tr = GetComponent<TrailRenderer>();
         if (tr != null)
             tr.enabled = false;
     }
@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         animator.SetFloat(Vertical, verticalMoveSpeed);
-        if (isFullyHypnotized) return;
+        if(!controllsEnabled) return;
         
         float moveX = Input.GetAxis("Horizontal");
         moveDirection = new Vector2(moveX, 0).normalized;
@@ -50,29 +50,29 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveDirection.x * horizontalMoveSpeed, verticalMoveSpeed);
-        
-        if (rb.velocity.y < 0)
-        {
-            PlayHyponotizedSound();
-        }
-        else
-        {
-            StopHyponotizedSound();
-        }
     }
 
-    public void ReverseVerticalMoveSpeed()
+    public void HandleHypnotizedState()
     {
-        verticalMoveSpeed *= -1;
+        ReverseVerticalMoveSpeed();
+    }
+
+    public void HandleHealthyState()
+    {
+        ReverseVerticalMoveSpeed();
     }
     
-    public void SetFullyHypnotized()
+    public void HandleFullyHypnotizedState()
     {
+        controllsEnabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
-        isFullyHypnotized = true;
-        moveDirection = new Vector2(0, moveDirection.y).normalized;
-        ReverseVerticalMoveSpeed();
-        PlayHyponotizedSound();
+        verticalMoveSpeed = -1;
+        moveDirection = Vector2.zero;
+    }
+
+    private void ReverseVerticalMoveSpeed()
+    {
+        verticalMoveSpeed *= -1;
     }
 
     private void CheckForDash()
@@ -102,8 +102,6 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash(int direction)
     {
-        BoxCollider2D boxCollider2D = GetComponent<BoxCollider2D>();
-        boxCollider2D.enabled = false;
         isDashing = true;
         float originalSpeed = horizontalMoveSpeed;
 
@@ -128,23 +126,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isDashing = false;
-        boxCollider2D.enabled = true;
-    }
-    
-    private void PlayHyponotizedSound()
-    {
-        if (hypnotizedSound != null && !hypnotizedSound.isPlaying)
-        {
-            hypnotizedSound.Play();
-        }
-    }
-    
-    private void StopHyponotizedSound()
-    {
-        if (hypnotizedSound != null && hypnotizedSound.isPlaying)
-        {
-            hypnotizedSound.Stop();
-        }
     }
 }
 

@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8565581675645957405}
   - component: {fileID: 962446944516706065}
-  - component: {fileID: 2106704316871232205}
   - component: {fileID: 4794948701444700087}
   m_Layer: 0
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: Heal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,18 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2106704316871232205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867711086288954332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1e4fab2345364594b6d785ceb5761a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &4794948701444700087
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -233,6 +220,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb3d3c8e392347a0a3cff705e95190c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onPlayerMissedHeal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6998085222528457113, guid: 8346fbc0b2fce4644941a78d350140b3, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SpawnHealItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9072108167431168360
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +246,7 @@ GameObject:
   - component: {fileID: 6050157260664206629}
   m_Layer: 0
   m_Name: Heal
-  m_TagString: Heal
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

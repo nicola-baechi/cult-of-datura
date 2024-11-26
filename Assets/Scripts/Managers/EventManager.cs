@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
@@ -17,45 +18,8 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public event Action OnPlayerEnterTrigger;
+    public UnityEvent onPlayerMissHealItem;
+    public UnityEvent onPlayerReachStart;
+    public UnityEvent OnPlayerHitRangedEnemy;
 
-    public event Action OnPlayerCollectHealItem;
-
-    public event Action OnPlayerCollectShieldItem;
-
-    public event Action OnPlayerMissHealItem; 
-    
-    public event Action OnPlayerCollectProjectileItem;
-
-    public event Action OnPlayerReachStart;
-
-    public void PlayerEnterTrigger()
-    {
-        OnPlayerEnterTrigger?.Invoke();
-    }
-    
-    public void PlayerCollectHealItem()
-    {
-        OnPlayerCollectHealItem?.Invoke();
-    }
-    
-    public void PlayerCollectShieldItem()
-    {
-        OnPlayerCollectShieldItem?.Invoke();
-    }
-    
-    public void PlayerMissHealItem()
-    {
-        OnPlayerMissHealItem?.Invoke();
-    }
-    
-    public void PlayerCollectProjectileItem()
-    {
-        OnPlayerCollectProjectileItem?.Invoke();
-    }
-    
-    public void PlayerReachStart()
-    {
-        OnPlayerReachStart?.Invoke();
-    }
 }

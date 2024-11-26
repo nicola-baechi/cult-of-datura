@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class PlayerAction : MonoBehaviour
+public class ItemInteraction : MonoBehaviour
 {
+    public UnityEvent onCollectHeal;
+    public UnityEvent onCollectShield;
+    
     [SerializeField] private GameObject projectilePrefab;
+    
     private int _projectileCount;
+    public bool _isShieldActive;
 
     private void Update()
     {
@@ -11,8 +17,28 @@ public class PlayerAction : MonoBehaviour
 
         ShootProjectile(GetNearestRangedEnemyInRange());
     }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Heal":
+                Debug.Log("Heal collected in ItemInteraction");
+                onCollectHeal.Invoke();
+                Destroy(other.gameObject);
+                break;
+            case "Projectile":
+                AddProjectile();
+                Destroy(other.gameObject);
+                break;
+            case "Shield":
+                ActivateShield();
+                Destroy(other.gameObject);
+                break;
+        }
+    }
 
-    public void AddProjectile()
+    private void AddProjectile()
     {
         _projectileCount++;
     }
@@ -45,5 +71,17 @@ public class PlayerAction : MonoBehaviour
         }
 
         return nearestObject;
+    }
+    
+    private void ActivateShield()
+    {
+        _isShieldActive = true;
+        onCollectShield.Invoke();
+        Invoke(nameof(DeactivateShield), 5);
+    }
+    
+    private void DeactivateShield()
+    {
+        _isShieldActive = false;
     }
 }

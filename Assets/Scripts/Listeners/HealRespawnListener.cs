@@ -1,13 +1,12 @@
 using UnityEngine;
-using UnityEngine.Events;
 
-public class MeeleEnemy : MonoBehaviour
+public class HealRespawnListener : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            EventManager.Instance.PlayerEnterTrigger();
+            EventManager.Instance.onPlayerMissHealItem.Invoke();
         }
     }
 }

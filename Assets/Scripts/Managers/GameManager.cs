@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,74 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject healItemPrefab;
 
     [SerializeField] private UnityEvent onGameOver;
-    [SerializeField] private GameObject vignette;
-    private int _health = 3;
-    private bool _isHypnotized;
-    private bool _isShieldActive;
     
-    private void OnEnable()
-    {
-        gameObject.GetComponent<EventManager>().OnPlayerEnterTrigger += HandlePlayerHitByEnemy;
-        gameObject.GetComponent<EventManager>().OnPlayerCollectHealItem += ResetHypnotizedState;
-        gameObject.GetComponent<EventManager>().OnPlayerCollectShieldItem += ActivateShield;
-        gameObject.GetComponent<EventManager>().OnPlayerMissHealItem += SpawnHealItem;
-        gameObject.GetComponent<EventManager>().OnPlayerCollectProjectileItem += updateInventory;
-        gameObject.GetComponent<EventManager>().OnPlayerReachStart += OnGameOver;
-    }
-
-    private void OnDisable()
-    {
-        gameObject.GetComponent<EventManager>().OnPlayerEnterTrigger -= HandlePlayerHitByEnemy;
-        gameObject.GetComponent<EventManager>().OnPlayerCollectHealItem -= ResetHypnotizedState;
-        gameObject.GetComponent<EventManager>().OnPlayerCollectShieldItem -= ActivateShield;
-        gameObject.GetComponent<EventManager>().OnPlayerMissHealItem -= SpawnHealItem;
-        gameObject.GetComponent<EventManager>().OnPlayerCollectProjectileItem -= updateInventory;
-        gameObject.GetComponent<EventManager>().OnPlayerReachStart -= OnGameOver;
-    }
-
-    public void HandlePlayerHitByEnemy()
-    {
-        if (_isShieldActive)
-        {
-            return;
-        }
-        
-        _health--;
-        Debug.Log("health reduced to: " + _health);
-
-        vignette.GetComponent<SpriteRenderer>().enabled = true;
-        if (_isHypnotized || _health <= 0)
-        {
-            player.SetFullyHypnotized();
-            DestroyAllHealItems();
-            OnGameOver();
-            return;
-        }
-
-        player.ReverseVerticalMoveSpeed();
-        _isHypnotized = true;
-        SpawnHealItem();
-    }
-
-    private void ResetHypnotizedState()
-    {
-        _isHypnotized = false;
-        player.ReverseVerticalMoveSpeed();
-        vignette.GetComponent<SpriteRenderer>().enabled = false;
-        
-        DestroyAllHealItems();
-    }
-    
-    private void DestroyAllHealItems()
-    {
-        GameObject[] healItems = GameObject.FindGameObjectsWithTag("Heal");
-        foreach (GameObject healItem in healItems)
-        {
-            Destroy(healItem);
-        }
-    }
-
-    private void SpawnHealItem()
+    public void SpawnHealItem()
     {
         Debug.Log("respawning heal item");
         Vector3 spawnPosition;
@@ -84,6 +20,7 @@ public class GameManager : MonoBehaviour
             float randomY = Random.Range(-10f, -5f);
             spawnPosition = player.transform.position + new Vector3(randomX, randomY, 0);
         } while (Physics2D.OverlapCircle(spawnPosition, 0.5f) != null);
+        Debug.Log(player.transform.position);
         Instantiate(
             healItemPrefab,
             spawnPosition,
@@ -91,24 +28,18 @@ public class GameManager : MonoBehaviour
         );
     }
 
-    private void updateInventory()
+    public void HandleGameOver()
     {
-        player.GetComponent<PlayerAction>().AddProjectile();
-    }
-
-    private void ActivateShield()
-    {
-        _isShieldActive = true;
-        Invoke(nameof(DeactivateShield), 5);
-    }
-    
-    private void DeactivateShield()
-    {
-        _isShieldActive = false;
-    }
-
-    public void OnGameOver()
-    {
+        DestroyAllHealItems();
         onGameOver?.Invoke();
+    }
+
+    public void DestroyAllHealItems()
+    {
+        GameObject[] healItems = GameObject.FindGameObjectsWithTag("Heal");
+        foreach (GameObject healItem in healItems)
+        {
+            Destroy(healItem);
+        }
     }
 }

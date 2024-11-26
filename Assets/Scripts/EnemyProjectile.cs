@@ -34,8 +34,6 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("hit:" + other.gameObject.name);
-            EventManager.Instance.PlayerEnterTrigger();
             Destroy(gameObject);
         }
     }

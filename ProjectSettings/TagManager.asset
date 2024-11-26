@@ -8,6 +8,9 @@ TagManager:
   - RangedEnemy
   - Heal
   - SceneManager
+  - Damaging
+  - Shield
+  - Projectile
   layers:
   - Default
   - TransparentFX
