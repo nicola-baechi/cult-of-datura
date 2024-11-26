@@ -106,7 +106,6 @@ public class SoundManager : MonoBehaviour
         {
             startSceneSound.loop = true;
             startSceneSound.Play();
-            Debug.Log(startSceneSound.enabled);
         }
     }
 
