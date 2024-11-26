@@ -5,11 +5,25 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     public PlayerMovement player;
     public GameObject healItemPrefab;
 
     [SerializeField] private UnityEvent onGameOver;
-    
+
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void SpawnHealItem()
     {
         Debug.Log("respawning heal item");
@@ -20,6 +34,7 @@ public class GameManager : MonoBehaviour
             float randomY = Random.Range(-10f, -5f);
             spawnPosition = player.transform.position + new Vector3(randomX, randomY, 0);
         } while (Physics2D.OverlapCircle(spawnPosition, 0.5f) != null);
+
         Debug.Log(player.transform.position);
         Instantiate(
             healItemPrefab,
