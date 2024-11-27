@@ -58,8 +58,7 @@ public class GameManager : MonoBehaviour
             float randomY = Random.Range(-10f, -5f);
             spawnPosition = player.transform.position + new Vector3(randomX, randomY, 0);
         } while (Physics2D.OverlapCircle(spawnPosition, 0.5f) != null);
-
-        Debug.Log(player.transform.position);
+        
         Instantiate(
             healItemPrefab,
             spawnPosition,
