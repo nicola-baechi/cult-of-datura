@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject healItemPrefab;
 
+    private int _playerHitAmount;
+
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = false;
         
-        EventManager.Instance.onPlayerHit.AddListener(SpawnHealItem);
+        EventManager.Instance.onPlayerHit.AddListener(HandlePlayerHit);
         EventManager.Instance.onPlayerCollectHealItem.AddListener(DestroyAllHealItems);
         EventManager.Instance.onPlayerMissHealItem.AddListener(SpawnHealItem);
         EventManager.Instance.onPlayerDie.AddListener(HandleGameOver);
@@ -32,11 +34,17 @@ public class GameManager : MonoBehaviour
     
     private void OnDisable()
     {
-        EventManager.Instance.onPlayerHit.RemoveListener(SpawnHealItem);
+        EventManager.Instance.onPlayerHit.RemoveListener(HandlePlayerHit);
         EventManager.Instance.onPlayerCollectHealItem.RemoveListener(DestroyAllHealItems);
         EventManager.Instance.onPlayerMissHealItem.RemoveListener(SpawnHealItem);
         EventManager.Instance.onPlayerDie.RemoveListener(HandleGameOver);
         EventManager.Instance.onPlayerReachStart.RemoveListener(HandleGameOver);
+    }
+
+    private void HandlePlayerHit()
+    {
+        SpawnHealItem();
+        _playerHitAmount++;
     }
 
     public void SpawnHealItem()
@@ -71,5 +79,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(healItem);
         }
+    }
+    
+    public int GetPlayerHitAmount()
+    {
+        return _playerHitAmount;
     }
 }

@@ -9,6 +9,7 @@ public class GameSceneManager : MonoBehaviour
     public UnityEvent onSceneChangeToMain;
     public UnityEvent onSceneChangeToStart;
     public UnityEvent onSceneChangeToGameOver;
+    public UnityEvent onSceneChangeToEnd;
 
     private readonly string START_SCENE = "Start";
     private readonly string MAIN_SCENE = "Main";
@@ -93,5 +94,6 @@ public class GameSceneManager : MonoBehaviour
     public void LoadEndScene()
     {
         SceneManager.LoadScene(END_SCENE, LoadSceneMode.Single);
+        onSceneChangeToEnd.Invoke();
     }
 }

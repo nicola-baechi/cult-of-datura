@@ -4,6 +4,9 @@ public class EndListener : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        EventManager.Instance.onPlayerReachEnd.Invoke();
+        if (other.gameObject.CompareTag("Player"))
+        {
+            EventManager.Instance.onPlayerReachEnd.Invoke();
+        }
     }
 }

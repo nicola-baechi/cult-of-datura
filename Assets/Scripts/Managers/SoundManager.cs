@@ -18,6 +18,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource mainSceneSound;
 
     [SerializeField] private AudioSource gameOverSound;
+    
+    [SerializeField] private AudioSource endSceneSound;
 
     public void Awake()
     {
@@ -36,6 +38,7 @@ public class SoundManager : MonoBehaviour
         GameSceneManager.Instance.onSceneChangeToStart.AddListener(PlayStartSceneSound);
         GameSceneManager.Instance.onSceneChangeToMain.AddListener(PlayMainSceneSound);
         GameSceneManager.Instance.onSceneChangeToGameOver.AddListener(PlayGameOverSound);
+        GameSceneManager.Instance.onSceneChangeToEnd.AddListener(PlayEndSound);
         EventManager.Instance.onPlayerCollectHealItem.AddListener(PlayHealItemSound);
         EventManager.Instance.onPlayerCollectHealItem.AddListener(StopHyponotizedSound);
         EventManager.Instance.onPlayerCollectHealItem.AddListener(PlayMainSceneSound);
@@ -49,6 +52,7 @@ public class SoundManager : MonoBehaviour
     {
         GameSceneManager.Instance.onSceneChangeToStart.RemoveListener(PlayStartSceneSound);
         GameSceneManager.Instance.onSceneChangeToMain.RemoveListener(PlayMainSceneSound);
+        GameSceneManager.Instance.onSceneChangeToEnd.RemoveListener(PlayEndSound);
         GameSceneManager.Instance.onSceneChangeToGameOver.RemoveListener(PlayGameOverSound);
         EventManager.Instance.onPlayerCollectHealItem.RemoveListener(PlayHealItemSound);
         EventManager.Instance.onPlayerCollectHealItem.RemoveListener(StopHyponotizedSound);
@@ -134,6 +138,16 @@ public class SoundManager : MonoBehaviour
         {
             gameOverSound.loop = true;
             gameOverSound.Play();
+        }
+    }
+
+    public void PlayEndSound()
+    {
+        StopAllBackgroundSounds();
+        if (endSceneSound != null && !endSceneSound.isPlaying)
+        {
+            endSceneSound.loop = true;
+            endSceneSound.Play();
         }
     }
 
