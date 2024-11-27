@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -17,22 +15,20 @@ public class Caption : MonoBehaviour
     void Start()
     {
         _gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        _textField = GetComponent<TMP_Text>();
         _textField.text = evaluateCaption();
     }
 
     private string evaluateCaption()
     {
         int hitCount = _gameManager.GetComponent<GameManager>().GetPlayerHitAmount();
-        switch(hitCount)
+        Debug.Log("hitcount:" + hitCount);
+        return hitCount switch
         {
-            case 0:
-                return noHitCaptions[Random.Range(0, noHitCaptions.Length)];
-            case 1:
-                return onceHitCaptions[Random.Range(0, onceHitCaptions.Length)];
-            case 2:
-                return twiceHitCaptions[Random.Range(0, twiceHitCaptions.Length)];
-            default:
-                return "Error";
-        }
+            0 => noHitCaptions[Random.Range(0, noHitCaptions.Length)],
+            1 => onceHitCaptions[Random.Range(0, onceHitCaptions.Length)],
+            2 => twiceHitCaptions[Random.Range(0, twiceHitCaptions.Length)],
+            _ => "Error"
+        };
     }
 }

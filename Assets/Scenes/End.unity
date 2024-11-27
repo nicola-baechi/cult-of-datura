@@ -294,7 +294,11 @@ MonoBehaviour:
   - You escaped, but their influence lingers. You struggle to trust your own mind.
   - "You\u2019re free, but you often feel their whispers pulling at your thoughts."
   - You made it out, but paranoia follows you. Life will never feel the same.
-  twiceHitCaptions: []
+  twiceHitCaptions:
+  - "The cult didn\u2019t take you, but it destroyed you. You\u2019re a shadow of
+    who you were."
+  - You survived, but the world is no longer yours. A broken mind keeps you isolated.
+  - You escaped the cult, but now your days are spent in a mental hospital.
 --- !u!1 &322218674
 GameObject:
   m_ObjectHideFlags: 0
