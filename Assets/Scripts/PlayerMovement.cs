@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveDirection;
     private void Start()
     {
+        // NOTE: needs to be here because onEnable would be too early since EventManager is not yet initialized
         EventManager.Instance.onPlayerCollectHealItem.AddListener(HandleHealthyState);
         EventManager.Instance.onPlayerHit.AddListener(HandleHypnotizedState);
         EventManager.Instance.onPlayerDie.AddListener(HandleFullyHypnotizedState);
