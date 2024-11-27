@@ -24,7 +24,6 @@ public class EventManager : MonoBehaviour
     public UnityEvent onPlayerCollectShieldItem;
     public UnityEvent onPlayerCollectProjectileItem;
     public UnityEvent onPlayerShootProjectile;
-    public UnityEvent onRangedEnemyShootProjectile;
     public UnityEvent onPlayerHit;
     public UnityEvent onPlayerDie;
     public UnityEvent onPlayerReachEnd;

@@ -38,7 +38,7 @@ public class Bush : MonoBehaviour
     {
         var spriteRenderer = GetComponent<SpriteRenderer>();
         var color = spriteRenderer.color;
-        color.a = 0.25f;
+        color.a = 0.5f;
         spriteRenderer.color = color;
     }
     

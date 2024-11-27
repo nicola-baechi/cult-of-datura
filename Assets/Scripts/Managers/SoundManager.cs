@@ -56,9 +56,9 @@ public class SoundManager : MonoBehaviour
         
         EventManager.Instance.onPlayerHit.AddListener(PlayHyponotizedSound);
         EventManager.Instance.onPlayerHit.AddListener(StopMainSceneSound);
+        EventManager.Instance.onPlayerDie.AddListener(PlayHyponotizedSound);
+        EventManager.Instance.onPlayerDie.AddListener(StopMainSceneSound);
         EventManager.Instance.onPlayerHitRangedEnemy.AddListener(PlayRangedEnemyHitSound);
-        
-        EventManager.Instance.onRangedEnemyShootProjectile.AddListener(PlayProjectileShootSound);
     }
 
     private void OnDisable()
@@ -77,9 +77,9 @@ public class SoundManager : MonoBehaviour
         
         EventManager.Instance.onPlayerHit.RemoveListener(PlayHyponotizedSound);
         EventManager.Instance.onPlayerHit.RemoveListener(StopMainSceneSound);
+        EventManager.Instance.onPlayerDie.RemoveListener(PlayHyponotizedSound);
+        EventManager.Instance.onPlayerDie.RemoveListener(StopMainSceneSound);
         EventManager.Instance.onPlayerHitRangedEnemy.RemoveListener(PlayRangedEnemyHitSound);
-        
-        EventManager.Instance.onRangedEnemyShootProjectile.RemoveListener(PlayProjectileShootSound);
     }
 
     public void PlayHyponotizedSound()

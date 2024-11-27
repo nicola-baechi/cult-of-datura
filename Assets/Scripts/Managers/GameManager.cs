@@ -50,11 +50,10 @@ public class GameManager : MonoBehaviour
     public void SpawnHealItem()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log("respawning heal item");
         Vector3 spawnPosition;
         do
         {
-            float randomX = Random.Range(-6f, 6f);
+            float randomX = Random.Range(-5f, 5f);
             float randomY = Random.Range(-10f, -5f);
             spawnPosition = player.transform.position + new Vector3(randomX, randomY, 0);
         } while (Physics2D.OverlapCircle(spawnPosition, 0.5f) != null);

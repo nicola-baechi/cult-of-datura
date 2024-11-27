@@ -4,7 +4,9 @@ public class RangedEnemy : MonoBehaviour
 {
     public GameObject projectile;
     public Transform projectilePosition;
+    
     private GameObject player;
+    private AudioSource shootSound;
 
     [SerializeField] private float cooldown = 0.5f;
 
@@ -14,6 +16,7 @@ public class RangedEnemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        shootSound = GetComponent<AudioSource>();
         timer = cooldown;
     }
 
@@ -35,6 +38,6 @@ public class RangedEnemy : MonoBehaviour
     private void shoot()
     {
         Instantiate(projectile, projectilePosition.position, Quaternion.identity);
-        EventManager.Instance.onRangedEnemyShootProjectile.Invoke();
+        shootSound.Play();
     }
 }
