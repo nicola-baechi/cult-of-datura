@@ -11,12 +11,16 @@ public class PlayerMovement : MonoBehaviour
     public float dashSpeed = 15f;
     public float dashDuration = 0.2f;
     public float doubleTapTime = 0.2f;
+    public float dashCooldown = 3f;
 
     public Animator animator;
 
+    private Cooldown dashCooldownIndicator;
+    
     private float lastTapTimeA;
     private float lastTapTimeD;
     private bool isDashing;
+    private bool isDashCooldown;
 
     private bool controllsEnabled = true;
 
@@ -25,12 +29,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     private Vector2 moveDirection;
+
     private void Start()
     {
         // NOTE: needs to be here because onEnable would be too early since EventManager is not yet initialized
         EventManager.Instance.onPlayerCollectHealItem.AddListener(HandleHealthyState);
         EventManager.Instance.onPlayerHit.AddListener(HandleHypnotizedState);
         EventManager.Instance.onPlayerDie.AddListener(HandleFullyHypnotizedState);
+
+        dashCooldownIndicator = GetComponent<Cooldown>();
+        dashCooldownIndicator.MaxTime = dashCooldown;
     }
 
     private void OnDisable()
@@ -50,14 +58,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-private void Update()
+    private void Update()
     {
         animator.SetFloat(Vertical, verticalMoveSpeed);
-        if(!controllsEnabled) return;
-        
+        if (!controllsEnabled) return;
+
         float moveX = Input.GetAxis("Horizontal");
         moveDirection = new Vector2(moveX, 0).normalized;
-        
+
         CheckForDash();
     }
 
@@ -75,7 +83,7 @@ private void Update()
     {
         ReverseVerticalMoveSpeed();
     }
-    
+
     public void HandleFullyHypnotizedState()
     {
         controllsEnabled = false;
@@ -91,17 +99,18 @@ private void Update()
 
     private void CheckForDash()
     {
-        if (isDashing)
+        if (isDashing || isDashCooldown)
         {
             return;
         }
-        
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             if (Time.time - lastTapTimeA < doubleTapTime)
             {
                 StartCoroutine(Dash(1));
             }
+
             lastTapTimeA = Time.time;
         }
         else if (Input.GetKeyDown(KeyCode.D))
@@ -110,6 +119,7 @@ private void Update()
             {
                 StartCoroutine(Dash(1));
             }
+
             lastTapTimeD = Time.time;
         }
     }
@@ -119,27 +129,24 @@ private void Update()
         isDashing = true;
         float originalSpeed = horizontalMoveSpeed;
 
-        //Enable Trail renderer
-        if (tr != null)
-        {
-            tr.enabled = true;
-        }
-        
+        tr.enabled = true;
+
         //Increase Speed for dashing
         horizontalMoveSpeed = dashSpeed * direction;
-        
+
         yield return new WaitForSeconds(dashDuration);
-        
+
         //Speed reset
         horizontalMoveSpeed = Mathf.Abs(originalSpeed) * (direction < 0 ? -1 : 1);
 
-        //Disable Trail renderer
-        if (tr != null)
-        {
-            tr.enabled = false;
-        }
+        tr.enabled = false;
 
         isDashing = false;
+        isDashCooldown = true;
+        dashCooldownIndicator.StartCooldown();
+
+        yield return new WaitForSeconds(dashCooldown);
+
+        isDashCooldown = false;
     }
 }
-
