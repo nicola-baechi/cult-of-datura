@@ -247,6 +247,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &771755064
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4262098942219481340, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_Name
+      value: Transition
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787145241792243752, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787145241792243752, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787145241792243752, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787145241792243752, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787145241792243752, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787145241792243752, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787145241792243752, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787145241792243752, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787145241792243752, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787145241792243752, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8ca1b3a4cd6c947a391d8d3452169bf1, type: 3}
 --- !u!1 &797137640
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,7 +774,7 @@ MonoBehaviour:
     But the cult doesn\u2019t let go easily. They send hypnotized followers to capture
     you, and your father\u2014their relentless leader\u2014is right behind. Run for
     your freedom. Run for your life."
-  textSpeed: 0.1
+  textSpeed: 0.05
 --- !u!1 &1913645919
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +1006,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 486089257}
+  - {fileID: 771755064}
   - {fileID: 2085905921}
   - {fileID: 1125966748}
   - {fileID: 587846012}

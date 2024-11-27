@@ -20,6 +20,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource gameOverSound;
     
     [SerializeField] private AudioSource endSceneSound;
+    
+    [SerializeField] private AudioSource loreSceneSound;
 
     public void Awake()
     {
@@ -39,6 +41,7 @@ public class SoundManager : MonoBehaviour
         GameSceneManager.Instance.onSceneChangeToMain.AddListener(PlayMainSceneSound);
         GameSceneManager.Instance.onSceneChangeToGameOver.AddListener(PlayGameOverSound);
         GameSceneManager.Instance.onSceneChangeToEnd.AddListener(PlayEndSound);
+        GameSceneManager.Instance.onSceneChangeToLore.AddListener(PlayLoreSceneSound);
         EventManager.Instance.onPlayerCollectHealItem.AddListener(PlayHealItemSound);
         EventManager.Instance.onPlayerCollectHealItem.AddListener(StopHyponotizedSound);
         EventManager.Instance.onPlayerCollectHealItem.AddListener(PlayMainSceneSound);
@@ -54,6 +57,7 @@ public class SoundManager : MonoBehaviour
         GameSceneManager.Instance.onSceneChangeToMain.RemoveListener(PlayMainSceneSound);
         GameSceneManager.Instance.onSceneChangeToEnd.RemoveListener(PlayEndSound);
         GameSceneManager.Instance.onSceneChangeToGameOver.RemoveListener(PlayGameOverSound);
+        GameSceneManager.Instance.onSceneChangeToLore.RemoveListener(PlayLoreSceneSound);
         EventManager.Instance.onPlayerCollectHealItem.RemoveListener(PlayHealItemSound);
         EventManager.Instance.onPlayerCollectHealItem.RemoveListener(StopHyponotizedSound);
         EventManager.Instance.onPlayerCollectShieldItem.RemoveListener(PlayShieldItemSound);
@@ -150,6 +154,16 @@ public class SoundManager : MonoBehaviour
             endSceneSound.Play();
         }
     }
+    
+    public void PlayLoreSceneSound()
+    {
+        StopAllBackgroundSounds();
+        if (loreSceneSound != null && !loreSceneSound.isPlaying)
+        {
+            loreSceneSound.loop = true;
+            loreSceneSound.Play();
+        }
+    }
 
     private void StopAllBackgroundSounds()
     {
@@ -171,6 +185,11 @@ public class SoundManager : MonoBehaviour
         if (gameOverSound != null && gameOverSound.isPlaying)
         {
             gameOverSound.Stop();
+        }
+        
+        if (loreSceneSound != null && loreSceneSound.isPlaying)
+        {
+            loreSceneSound.Stop();
         }
     }
     
