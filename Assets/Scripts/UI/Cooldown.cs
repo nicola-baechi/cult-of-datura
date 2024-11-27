@@ -19,7 +19,6 @@ public class Cooldown : MonoBehaviour
     private void Update()
     {
         if (!_isCooldownStarted) return;
-        
         if(remainingTime > 0)
         {
             parent.SetActive(true);

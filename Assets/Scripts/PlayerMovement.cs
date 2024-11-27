@@ -36,9 +36,6 @@ public class PlayerMovement : MonoBehaviour
         EventManager.Instance.onPlayerCollectHealItem.AddListener(HandleHealthyState);
         EventManager.Instance.onPlayerHit.AddListener(HandleHypnotizedState);
         EventManager.Instance.onPlayerDie.AddListener(HandleFullyHypnotizedState);
-
-        dashCooldownIndicator = GetComponent<Cooldown>();
-        dashCooldownIndicator.MaxTime = dashCooldown;
     }
 
     private void OnDisable()
@@ -55,6 +52,9 @@ public class PlayerMovement : MonoBehaviour
         tr = GetComponent<TrailRenderer>();
         if (tr != null)
             tr.enabled = false;
+        
+        dashCooldownIndicator = GetComponent<Cooldown>();
+        dashCooldownIndicator.MaxTime = dashCooldown;
     }
 
 
