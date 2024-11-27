@@ -17,7 +17,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance && Instance != this)
         {
             Destroy(gameObject);
             return;
