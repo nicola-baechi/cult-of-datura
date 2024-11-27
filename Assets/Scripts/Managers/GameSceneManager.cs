@@ -10,7 +10,9 @@ public class GameSceneManager : MonoBehaviour
     public UnityEvent onSceneChangeToStart;
     public UnityEvent onSceneChangeToGameOver;
     public UnityEvent onSceneChangeToEnd;
+    public UnityEvent onSceneChangeToLore;
 
+    private readonly string LORE_SCENE = "Lore";
     private readonly string START_SCENE = "Start";
     private readonly string MAIN_SCENE = "Main";
     private readonly string GAME_OVER_SCENE = "GameOver";
@@ -49,9 +51,14 @@ public class GameSceneManager : MonoBehaviour
     {
         string currentScene = SceneManager.GetActiveScene().name;
 
-        if (currentScene == START_SCENE && Input.GetKeyDown(KeyCode.Return))
+        if (currentScene == LORE_SCENE && Input.GetKeyDown(KeyCode.Return))
         {
             LoadMainScene();
+        }
+        
+        if (currentScene == START_SCENE && Input.GetKeyDown(KeyCode.Return))
+        {
+            LoadLoreScene();
         }
 
         if (currentScene == GAME_OVER_SCENE)
@@ -68,6 +75,12 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+    public void LoadLoreScene()
+    {
+        SceneManager.LoadScene(LORE_SCENE, LoadSceneMode.Single);
+        onSceneChangeToLore.Invoke();
+    }
+    
     public void LoadStartScene()
     {
         SceneManager.LoadScene(START_SCENE, LoadSceneMode.Single);
