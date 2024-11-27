@@ -4,36 +4,34 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private static readonly int Vertical = Animator.StringToHash("verticalInput");
-    
+
     public float horizontalMoveSpeed = 5f;
     public float verticalMoveSpeed = 3f;
-    
+
     public float dashSpeed = 15f;
     public float dashDuration = 0.2f;
     public float doubleTapTime = 0.2f;
 
     public Animator animator;
-    
+
     private float lastTapTimeA;
     private float lastTapTimeD;
     private bool isDashing;
-    
-    private bool controllsEnabled = true;
-    
-    [SerializeField]
-    private TrailRenderer tr;
-    
-    private Rigidbody2D rb;
-    
-    private Vector2 moveDirection;
 
-    private void OnEnable()
+    private bool controllsEnabled = true;
+
+    [SerializeField] private TrailRenderer tr;
+
+    private Rigidbody2D rb;
+
+    private Vector2 moveDirection;
+    private void Start()
     {
         EventManager.Instance.onPlayerCollectHealItem.AddListener(HandleHealthyState);
         EventManager.Instance.onPlayerHit.AddListener(HandleHypnotizedState);
         EventManager.Instance.onPlayerDie.AddListener(HandleFullyHypnotizedState);
     }
-    
+
     private void OnDisable()
     {
         EventManager.Instance.onPlayerCollectHealItem.RemoveListener(HandleHealthyState);
@@ -44,13 +42,14 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+
         tr = GetComponent<TrailRenderer>();
         if (tr != null)
             tr.enabled = false;
     }
-    
-    private void Update()
+
+
+private void Update()
     {
         animator.SetFloat(Vertical, verticalMoveSpeed);
         if(!controllsEnabled) return;

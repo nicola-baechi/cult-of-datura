@@ -8,11 +8,6 @@ public class Hypnosis : MonoBehaviour
     private GameObject vignette;
     private bool _isHypnotized;
 
-    private void OnEnable()
-    {
-        EventManager.Instance.onPlayerCollectHealItem.AddListener(ResetHypnosis);
-    }
-
     private void OnDisable()
     {
         EventManager.Instance.onPlayerCollectHealItem.RemoveListener(ResetHypnosis);
@@ -20,6 +15,7 @@ public class Hypnosis : MonoBehaviour
 
     private void Start()
     {
+        EventManager.Instance.onPlayerCollectHealItem.AddListener(ResetHypnosis);
         vignette = GameObject.FindGameObjectWithTag("Vignette");
     }
 
