@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6257739509747729884}
   - component: {fileID: 5771609794071985886}
   - component: {fileID: 3191532705045935205}
-  - component: {fileID: 7117427473158867355}
+  - component: {fileID: 2263988913379348745}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.6406, y: 1.3329, z: -0.07663475}
-  m_LocalScale: {x: 0.34033817, y: 0.30016074, z: 0.3292592}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f00b2db38b6e546e1bd27f197ef6f1cd, type: 3}
-  m_Color: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,7 +99,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7117427473158867355
+--- !u!61 &2263988913379348745
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,16 +131,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.016080856, y: -1.5680162}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10, y: 9.06}
+    oldSize: {x: 2.5, y: 2.265}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.4582615, y: 11.043446}
+  m_Size: {x: 4.31, y: 3.65}
   m_EdgeRadius: 0

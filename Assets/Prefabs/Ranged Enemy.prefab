@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 891372544250464253, guid: f8150da2bc3024fc3801eb4eccdd111c, type: 3}
   projectilePosition: {fileID: 6184255312575117061}
-  cooldown: 2
+  cooldown: 2.5
 --- !u!61 &3494694832244756899
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.98, y: 2.55}
   m_EdgeRadius: 0
 --- !u!95 &3260855020688403588
 Animator:

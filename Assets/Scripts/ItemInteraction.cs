@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class ItemInteraction : MonoBehaviour
 {
-    [SerializeField] private GameObject projectilePrefab;
-    
-    private int _projectileCount;
     public bool _isShieldActive;
+    public Animator animator;
+    
+    [SerializeField] private GameObject projectilePrefab;
+    private int _projectileCount;
 
     private void Update()
     {
         if (_projectileCount < 1) return;
 
-        ShootProjectile(GetNearestRangedEnemyInRange());
+        GameObject nearestRangedEnemy = GetNearestRangedEnemyInRange();
+        
+        if (!nearestRangedEnemy) return;
+        ShootProjectile(nearestRangedEnemy);
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -36,12 +40,13 @@ public class ItemInteraction : MonoBehaviour
 
     private void AddProjectile()
     {
+        EventManager.Instance.onPlayerCollectProjectileItem.Invoke();
         _projectileCount++;
     }
 
     private void ShootProjectile(GameObject target)
     {
-        Debug.Log("Shooting projectile at " + target.name);
+        EventManager.Instance.onPlayerShootProjectile.Invoke();
         var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         projectile.GetComponent<PlayerProjectile>().shoot(target.transform);
         --_projectileCount;
@@ -59,7 +64,7 @@ public class ItemInteraction : MonoBehaviour
             float distance = Vector3.Distance(currentPosition, rangedEnemy.transform.position);
 
             // Check if the object is within range
-            if (distance <= 8f && distance < minDistance)
+            if (distance <= 5f && distance < minDistance)
             {
                 minDistance = distance;
                 nearestObject = rangedEnemy;
@@ -72,6 +77,7 @@ public class ItemInteraction : MonoBehaviour
     private void ActivateShield()
     {
         _isShieldActive = true;
+        animator.SetTrigger("shield");
         EventManager.Instance.onPlayerCollectShieldItem.Invoke();
         Invoke(nameof(DeactivateShield), 5);
     }
@@ -79,5 +85,6 @@ public class ItemInteraction : MonoBehaviour
     private void DeactivateShield()
     {
         _isShieldActive = false;
+        animator.SetTrigger("shield");
     }
 }

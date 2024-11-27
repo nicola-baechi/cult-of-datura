@@ -29,12 +29,15 @@ public class Hypnosis : MonoBehaviour
     {
         if (other.CompareTag("Damaging"))
         {
-            if (GetComponent<ItemInteraction>()._isShieldActive) return;
+            if (GetComponent<ItemInteraction>()._isShieldActive)
+            {
+                EventManager.Instance.onShieldBlockDamage.Invoke();
+                return;
+            }
 
             health--;
             if (health <= 0 || _isHypnotized)
             {
-                Debug.Log("Player died");
                 EventManager.Instance.onPlayerDie.Invoke();
             }
             else

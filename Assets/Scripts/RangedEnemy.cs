@@ -6,7 +6,7 @@ public class RangedEnemy : MonoBehaviour
     public Transform projectilePosition;
     private GameObject player;
 
-    [SerializeField] private float cooldown = 2;
+    [SerializeField] private float cooldown = 0.5f;
 
     private float timer;
 
@@ -14,6 +14,7 @@ public class RangedEnemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        timer = cooldown;
     }
 
     // Update is called once per frame
@@ -24,7 +25,7 @@ public class RangedEnemy : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (timer > cooldown)
+        if (timer >= cooldown)
         {
             timer = 0;
             shoot();
@@ -34,5 +35,6 @@ public class RangedEnemy : MonoBehaviour
     private void shoot()
     {
         Instantiate(projectile, projectilePosition.position, Quaternion.identity);
+        EventManager.Instance.onRangedEnemyShootProjectile.Invoke();
     }
 }

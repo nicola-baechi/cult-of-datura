@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6969384138767153832}
   - component: {fileID: 4322656111556960963}
-  - component: {fileID: 2184504652555301488}
+  - component: {fileID: 3722301323875592147}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Damaging
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2184504652555301488
+--- !u!61 &3722301323875592147
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.026688963, y: 0.34361959}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,5 +128,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.45287734, y: 0.4728942}
+  m_Size: {x: 1.16, y: 1.92}
   m_EdgeRadius: 0

@@ -13,6 +13,10 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource shieldSound;
 
+    [SerializeField] private AudioSource projectileItemSound;
+    
+    [SerializeField] private AudioSource projectileShootSound;
+
     [SerializeField] private AudioSource startSceneSound;
 
     [SerializeField] private AudioSource mainSceneSound;
@@ -30,7 +34,7 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+    
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -42,13 +46,19 @@ public class SoundManager : MonoBehaviour
         GameSceneManager.Instance.onSceneChangeToGameOver.AddListener(PlayGameOverSound);
         GameSceneManager.Instance.onSceneChangeToEnd.AddListener(PlayEndSound);
         GameSceneManager.Instance.onSceneChangeToLore.AddListener(PlayLoreSceneSound);
+            
         EventManager.Instance.onPlayerCollectHealItem.AddListener(PlayHealItemSound);
         EventManager.Instance.onPlayerCollectHealItem.AddListener(StopHyponotizedSound);
         EventManager.Instance.onPlayerCollectHealItem.AddListener(PlayMainSceneSound);
         EventManager.Instance.onPlayerCollectShieldItem.AddListener(PlayShieldItemSound);
+        EventManager.Instance.onPlayerCollectProjectileItem.AddListener(PlayProjectileItemSound);
+        EventManager.Instance.onPlayerShootProjectile.AddListener(PlayProjectileShootSound);
+        
         EventManager.Instance.onPlayerHit.AddListener(PlayHyponotizedSound);
         EventManager.Instance.onPlayerHit.AddListener(StopMainSceneSound);
         EventManager.Instance.onPlayerHitRangedEnemy.AddListener(PlayRangedEnemyHitSound);
+        
+        EventManager.Instance.onRangedEnemyShootProjectile.AddListener(PlayProjectileShootSound);
     }
 
     private void OnDisable()
@@ -58,12 +68,18 @@ public class SoundManager : MonoBehaviour
         GameSceneManager.Instance.onSceneChangeToEnd.RemoveListener(PlayEndSound);
         GameSceneManager.Instance.onSceneChangeToGameOver.RemoveListener(PlayGameOverSound);
         GameSceneManager.Instance.onSceneChangeToLore.RemoveListener(PlayLoreSceneSound);
+        
         EventManager.Instance.onPlayerCollectHealItem.RemoveListener(PlayHealItemSound);
         EventManager.Instance.onPlayerCollectHealItem.RemoveListener(StopHyponotizedSound);
         EventManager.Instance.onPlayerCollectShieldItem.RemoveListener(PlayShieldItemSound);
+        EventManager.Instance.onPlayerCollectProjectileItem.RemoveListener(PlayProjectileItemSound);
+        EventManager.Instance.onPlayerShootProjectile.RemoveListener(PlayProjectileShootSound);
+        
         EventManager.Instance.onPlayerHit.RemoveListener(PlayHyponotizedSound);
         EventManager.Instance.onPlayerHit.RemoveListener(StopMainSceneSound);
         EventManager.Instance.onPlayerHitRangedEnemy.RemoveListener(PlayRangedEnemyHitSound);
+        
+        EventManager.Instance.onRangedEnemyShootProjectile.RemoveListener(PlayProjectileShootSound);
     }
 
     public void PlayHyponotizedSound()
@@ -162,6 +178,22 @@ public class SoundManager : MonoBehaviour
         {
             loreSceneSound.loop = true;
             loreSceneSound.Play();
+        }
+    }
+    
+    public void PlayProjectileItemSound()
+    {
+        if (projectileItemSound != null && !projectileItemSound.isPlaying)
+        {
+            projectileItemSound.Play();
+        }
+    }
+
+    public void PlayProjectileShootSound()
+    {
+        if (projectileShootSound != null && !projectileShootSound.isPlaying)
+        {
+            projectileShootSound.Play();
         }
     }
 

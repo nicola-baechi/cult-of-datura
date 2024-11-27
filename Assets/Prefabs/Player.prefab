@@ -289,8 +289,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8535692143416112591}
   m_Father: {fileID: 0}
@@ -437,7 +437,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 0.921997, y: 1.9581833}
+  m_Size: {x: 1.46, y: 2.18}
   m_EdgeRadius: 0
 --- !u!96 &4782023158680046996
 TrailRenderer:
@@ -564,8 +564,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074a196f211b04e5c88011e65c28f60d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 891372544250464253, guid: aab43efe360df4cfcb9a316f7426e458, type: 3}
   _isShieldActive: 0
+  animator: {fileID: 7790322642003164621}
+  projectilePrefab: {fileID: 891372544250464253, guid: aab43efe360df4cfcb9a316f7426e458, type: 3}
 --- !u!95 &7790322642003164621
 Animator:
   serializedVersion: 5
@@ -643,7 +644,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.70021677, y: 1.6059037}
+  m_Size: {x: 0.70021677, y: 1.81}
   m_EdgeRadius: 0
 --- !u!114 &8581928167563228057
 MonoBehaviour:
