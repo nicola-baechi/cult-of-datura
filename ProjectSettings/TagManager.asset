@@ -11,6 +11,7 @@ TagManager:
   - Damaging
   - Shield
   - Projectile
+  - Border
   - Vignette
   layers:
   - Default
