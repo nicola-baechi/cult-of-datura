@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2748817702714128312}
   - component: {fileID: 3494694832244756899}
   - component: {fileID: 3260855020688403588}
-  - component: {fileID: -2723993497550946350}
+  - component: {fileID: 6207233554317416245}
   m_Layer: 0
   m_Name: Ranged Enemy
   m_TagString: RangedEnemy
@@ -170,7 +170,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!82 &-2723993497550946350
+--- !u!82 &6207233554317416245
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
