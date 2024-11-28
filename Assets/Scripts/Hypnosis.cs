@@ -27,7 +27,7 @@ public class Hypnosis : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Damaging"))
+        if (other.CompareTag("Damaging") || other.CompareTag("MeeleEnemy"))
         {
             if (GetComponent<ItemInteraction>()._isShieldActive)
             {

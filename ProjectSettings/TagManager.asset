@@ -13,6 +13,7 @@ TagManager:
   - Projectile
   - Border
   - Vignette
+  - MeeleEnemy
   layers:
   - Default
   - TransparentFX

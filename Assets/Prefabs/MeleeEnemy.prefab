@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6469084482322791475}
   m_Layer: 0
   m_Name: MeleeEnemy
-  m_TagString: Damaging
+  m_TagString: MeeleEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,3 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561904cce32e1486ca9f6e80af37223f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialSpeed: 1

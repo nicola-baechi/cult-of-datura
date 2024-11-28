@@ -55,19 +55,24 @@ public class ItemInteraction : MonoBehaviour
     private GameObject GetNearestRangedEnemyInRange()
     {
         GameObject[] rangedEnemies = GameObject.FindGameObjectsWithTag("RangedEnemy");
+        GameObject[] meeleEnemies = GameObject.FindGameObjectsWithTag("MeeleEnemy");
+        GameObject[] allEnemies = new GameObject[rangedEnemies.Length + meeleEnemies.Length];
+        rangedEnemies.CopyTo(allEnemies, 0);
+        meeleEnemies.CopyTo(allEnemies, rangedEnemies.Length);
+        
         GameObject nearestObject = null;
         float minDistance = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
 
-        foreach (GameObject rangedEnemy in rangedEnemies)
+        foreach (GameObject enemy in allEnemies)
         {
-            float distance = Vector3.Distance(currentPosition, rangedEnemy.transform.position);
+            float distance = Vector3.Distance(currentPosition, enemy.transform.position);
 
             // Check if the object is within range
             if (distance <= 5f && distance < minDistance)
             {
                 minDistance = distance;
-                nearestObject = rangedEnemy;
+                nearestObject = enemy;
             }
         }
 

@@ -31,7 +31,7 @@ public class PlayerProjectile : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("RangedEnemy"))
+        if (other.gameObject.CompareTag("RangedEnemy") || other.gameObject.CompareTag("MeeleEnemy"))
         {
             EventManager.Instance.onPlayerHitRangedEnemy.Invoke();
             Destroy(other.gameObject);
