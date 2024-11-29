@@ -13,19 +13,23 @@ public class Dialogue : MonoBehaviour
     
     private int index;
     
+    private bool isPressed;
+    
     // Start is called before the first frame update
     void Start()
     {
         textComponent.text = string.Empty;
         lines[0] = text;
         StartDialogue();
+        isPressed = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) && !isPressed)
         {
+            isPressed = true;
             if (textComponent.text == lines[index])
             {
                 NextLine();
