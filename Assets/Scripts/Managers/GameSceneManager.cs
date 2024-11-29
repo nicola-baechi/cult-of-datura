@@ -103,11 +103,13 @@ public class GameSceneManager : MonoBehaviour
 
     public void LoadGameOverScene()
     {
-        Invoke(nameof(_loadGameOverScene), 3);
+        StartCoroutine(_loadGameOverScene());
     }
 
-    private void _loadGameOverScene()
+    private IEnumerator _loadGameOverScene()
     {
+        
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene(GAME_OVER_SCENE, LoadSceneMode.Single);
         onSceneChangeToGameOver.Invoke();
     }

@@ -7,6 +7,7 @@ public class Hypnosis : MonoBehaviour
 
     private GameObject vignette;
     private bool _isHypnotized;
+    private bool isFullyHypnotized;
 
     private void OnDisable()
     {
@@ -35,10 +36,13 @@ public class Hypnosis : MonoBehaviour
                 return;
             }
 
+            if (isFullyHypnotized) return;
+
             health--;
             if (health <= 0 || _isHypnotized)
             {
                 EventManager.Instance.onPlayerDie.Invoke();
+                isFullyHypnotized = true;
             }
             else
             {
