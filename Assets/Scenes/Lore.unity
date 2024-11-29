@@ -841,14 +841,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20c256f866b247fb9313618db670d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: "Raised as the heir to a secretive cult, you discover on your 18th birthday
+    that your destiny isn\u2019t your own. \n\nRefusing to submit, you escape, but
+    the cult won\u2019t let go. \nYour relentless father leads the hunt. \n\nRun
+    for freedom. Run for your life."
   textComponent: {fileID: 797137641}
   lines:
-  - "OU\u2019VE SPENT YOUR WHOLE LIFE IN THE SHADOWS OF A SECLUDED CULT, RAISED AS
-    THE HEIR TO ITS MYSTERIOUS RITUALS. ON YOUR 18TH BIRTHDAY, THE DAY OF YOUR CORONATION
-    AS THE NEW LEADER, YOU UNCOVER THE TRUTH: YOUR DESTINY ISN\u2019T YOURS TO CHOOSE.
-    REFUSING TO SUBMIT, YOU MAKE A DARING ESCAPE INTO THE UNKNOWN. BUT THE CULT DOESN\u2019T
-    LET GO EASILY. THEY SEND FOLLOWERS TO CAPTURE YOU. YOUR FATHER  \u2014THEIR RELENTLESS
-    LEADER\u2014  IS RIGHT BEHIND. RUN FOR YOUR FREEDOM. RUN FOR YOUR LIFE. RUN!"
+  - "ou\u2019ve spent your life in the shadows of a secluded cult, raised to inherit
+    its dark rituals. \\n  On your 18th birthday, the day of your coronation, you
+    uncover a chilling truth: your destiny isn\u2019t yours to choose. Refusing to
+    submit, you flee into the unknown. \\n  But the cult won\u2019t let go. Pursued
+    by its relentless followers \u2014 and your father, their leader \u2014 you must
+    run for your freedom. Run for your life!"
   textSpeed: 0.05
 --- !u!1 &1913645919
 GameObject:

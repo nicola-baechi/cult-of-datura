@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -34,10 +35,17 @@ public class GameSceneManager : MonoBehaviour
     private void Start()
     {
         // NOTE: has to be invoked here because if it was invoked in Awake, it would be invoked before the listeners are added
-        onSceneChangeToStart.Invoke();
+        // the delay of 0.1 is for the listeners which are added in Start() -> ugly workaround :(  but works :)
+        StartCoroutine(InvokeSceneChangeToStart());
         EventManager.Instance.onPlayerDie.AddListener(LoadGameOverScene);
         EventManager.Instance.onPlayerReachStart.AddListener(LoadGameOverScene);
         EventManager.Instance.onPlayerReachEnd.AddListener(LoadEndScene);
+    }
+    
+    private IEnumerator InvokeSceneChangeToStart()
+    {
+        yield return new WaitForSeconds(0.1f);
+        onSceneChangeToStart.Invoke();
     }
 
     private void OnDisable()

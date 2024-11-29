@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Dialogue : MonoBehaviour
 {
+    [TextArea] public string text;
+    
     public TextMeshProUGUI textComponent;
     public string[] lines;
     public float textSpeed;
@@ -15,6 +17,7 @@ public class Dialogue : MonoBehaviour
     void Start()
     {
         textComponent.text = string.Empty;
+        lines[0] = text;
         StartDialogue();
     }
 

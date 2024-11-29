@@ -23,7 +23,7 @@ public class MeeleEnemy : MonoBehaviour
         direction.Normalize();
 
 
-        if (_distance < 6)
+        if (_distance < 7)
         {
             transform.position = Vector2.MoveTowards(
                 this.transform.position,

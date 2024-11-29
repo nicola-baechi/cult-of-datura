@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void OnEnable()
+    private void Start()
     {
         GameSceneManager.Instance.onSceneChangeToStart.AddListener(PlayStartSceneSound);
         GameSceneManager.Instance.onSceneChangeToMain.AddListener(PlayMainSceneSound);
