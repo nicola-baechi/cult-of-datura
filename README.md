@@ -11,40 +11,12 @@ We had the following constraints:
 - A maximum of 10 sprites
 - A limit of 3 frames per animation.
 
-## :computer: Check it out
-Check the website out [here](https://vinine-grandmaster.vercel.app/). Some things wont work and display properly anymore, because the challenge is over and i havent updated some values yet. 
-(Might not work anymore since Heroku removed free plan 😟)
+## :video_game: Check it out
+Try the game for yourself on itch.io <a href="https://s4yyless.itch.io/cult-of-datura">here</a>!
 
-## :space_invader: Tech Stack
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
-    <li><a href="https://daisyui.com/">daisyUI</a></li>
-  </ul>
-</details>
+## :space_invader: Contributors
+Characters, Items, Environment & Animation: [@ookaryi](https://github.com/ookaryi) <br>
+UI, Sound, Code: [@s4yyless](https://github.com/s4yyless), [@nicola-baechi](https://github.com/nicola-baechi)
 
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-  </ul>
-</details>
 
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>Deployment</summary>
-  <ul>
-    <li><a href="https://www.postgresql.org/">Vercel</a> for Frontend</li>
-    <li><a href="https://www.postgresql.org/">Heroku</a> for Backend/DB</li>
-  </ul>
-</details>
 
