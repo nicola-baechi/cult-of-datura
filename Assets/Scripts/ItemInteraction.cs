@@ -83,6 +83,11 @@ public class ItemInteraction : MonoBehaviour
     {
         _isShieldActive = true;
         animator.SetTrigger("shield");
+
+        ShieldCooldown shieldCooldown = GetComponent<ShieldCooldown>();
+        shieldCooldown.MaxTime = 5;
+        shieldCooldown.StartCooldown();
+        
         EventManager.Instance.onPlayerCollectShieldItem.Invoke();
         Invoke(nameof(DeactivateShield), 5);
     }
